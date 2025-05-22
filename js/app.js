@@ -54,16 +54,39 @@ function showError(message) {
     }
  
     function showWeather(data){
-        const{main:{temp,temp_max,temp_min}} = data
+        const{name, main:{temp,temp_max,temp_min}} = data
+
         const degreesCelsius = kelvinToCelsius(temp)
+        const max = kelvinToCelsius(temp_max)
+        const min = kelvinToCelsius(temp_min)
+        
+        const city = document.createElement('p')
+        city.textContent = `Clima en: ${name}`
+        city.classList.add('font-bold','text-2xl')
+
+       
         const current = document.createElement('p')
-        current.innerHTML=`
-            ${degreesCelsius} &#8451;
-        `
+        current.innerHTML=`${degreesCelsius} &#8451;`
         current.classList.add('font-bold','text-6xl')
+
+        const maxTemp = document.createElement('p')
+        maxTemp.innerHTML = `Max: ${max} &#8451; `
+        maxTemp.classList.add('text-xl')
+
+        const minTemp = document.createElement('p')
+        minTemp.innerHTML = `Min: ${min} &#8451; `
+        minTemp.classList.add('text-xl')
+
+        
+
+
         const divResult = document.createElement('div')
         divResult.classList.add('text-center','text-white')
+        divResult.appendChild(city)
         divResult.appendChild(current)
+        divResult.appendChild(maxTemp)
+        divResult.appendChild(minTemp)
+
         result.appendChild(divResult)
 
        
