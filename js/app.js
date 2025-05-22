@@ -21,6 +21,8 @@ function searchWeather(e) {
     const appID = '1adee8b0d97d53fc41166c2e436aa21f' 
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${appID}`
     
+   spinner();
+
     fetch(url)
         .then( response => response.json())
         .then( data => {
@@ -99,6 +101,19 @@ function showError(message) {
         while(result.firstChild){
             result.removeChild(result.firstChild)
         }
+    }
+
+    function spinner(){
+        cleanHTML();
+        const spinnerDiv = document.createElement('div')
+        spinnerDiv.classList.add('spinner')
+
+        spinnerDiv.innerHTML = `
+         
+          <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        `
+        result.appendChild(spinnerDiv)
     }
 
 
