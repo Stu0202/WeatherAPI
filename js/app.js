@@ -24,6 +24,7 @@ function searchWeather(e) {
     fetch(url)
         .then( response => response.json())
         .then( data => {
+            cleanHTML();
             if(data.cod==="404"){
                 showError("City doesn't found")
                 return;
@@ -53,7 +54,28 @@ function showError(message) {
     }
  
     function showWeather(data){
-        
+        const{main:{temp,temp_max,temp_min}} = data
+        const degreesCelsius = kelvinToCelsius(temp)
+        const current = document.createElement('p')
+        current.innerHTML=`
+            ${degreesCelsius} &#8451;
+        `
+        current.classList.add('font-bold','text-6xl')
+        const divResult = document.createElement('div')
+        divResult.classList.add('text-center','text-white')
+        divResult.appendChild(current)
+        result.appendChild(divResult)
+
+       
+    }
+
+    const  kelvinToCelsius = degrees => parseInt(degrees-273.15)
+
+
+    function cleanHTML(){
+        while(result.firstChild){
+            result.removeChild(result.firstChild)
+        }
     }
 
 
